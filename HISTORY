@@ -1,4 +1,21 @@
 ===========================================================
+Package: CPSonFive 1.6.2
+===========================================================
+First release built by: gracinet at: 2010-03-14T16:52:30
+Requires
+~~~~~~~~
+-
+New features
+~~~~~~~~~~~~
+-
+Bug fixes
+~~~~~~~~~
+- Switch to mercurial DCVS and hgbundler release manager
+New internal features
+~~~~~~~~~~~~~~~~~~~~~
+- 
+
+===========================================================
 Package: CPSonFive 1.6.1
 ===========================================================
 First release built by: lregebro at: 2006-11-03T11:02:05

@@ -1,4 +1,3 @@
-# -*- coding: ISO-8859-15 -*-
 # (C) Copyright 2005 Nuxeo SARL <http://nuxeo.com>
 #
 # This program is free software; you can redistribute it and/or modify
@@ -42,20 +41,20 @@ def textForValue(self, term):
 
 
 from zope.i18n.interfaces import IUserPreferredCharsets
+from ZPublisher import Converters
 
-class ISO15Charset(object):
+class ZPublisherCharset(object):
     # This object implements the selector function for IUserPreferredCharsets
-    # but doesn't care what the user prefer, It returns ISO-8859-15 anyway.
-    # XXX For support of non-european languages, we need to match this with 
-    # the selected UI language somehow. 
+    # but doesn't care what the user prefer, It returns what's specified in
+    # zope.conf
     implements(IUserPreferredCharsets)
 
     def __init__(self, request):
         self.request = request
-        
+
     def getPreferredCharsets(self):
         '''See interface IUserPreferredCharsets'''
-        return ['iso-8859-15']
+        return [Converters.default_encoding]
 
 from zope.event import notify
 from Products.Five.form import EditView, Update, applyWidgetsChanges

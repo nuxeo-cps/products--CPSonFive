@@ -6,7 +6,7 @@
   <include file="form/overrides.zcml" />
 
   <adapter
-      factory=".ISO15Charset"
+      factory=".ZPublisherCharset"
       for="zope.publisher.interfaces.http.IHTTPRequest"
       provides="zope.i18n.interfaces.IUserPreferredCharsets"
       />

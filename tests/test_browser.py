@@ -67,6 +67,10 @@ class AqSafeBrowserViewTestCase(ZopeTestCase):
         view.aqSafeDel('content')
         self.assertRaises(AttributeError, view.aqSafeGet, 'content')
 
+    def test_default(self):
+        d = 'not there'
+        self.assertEquals(self.view.aqSafeGet('missing', d), d)
+
     def xtest_needed(self):
         # activate to know if the aqSafe stuff is useful (fails if not)
         view = self.view

@@ -53,9 +53,25 @@ class AqSafeBrowserViewTestCase(ZopeTestCase):
         view = self.view
         view.aqSafeSet('content', view.context)
         content = view.aqSafeGet('content')
-        # breaks with normal attribute set/get
-        self.assertEquals(content.absolute_url_path(),
-                          '/test_folder_1_/content')
+        # breaks with normal attribute set/get, see #2290
+        expected = self.folder.absolute_url_path() + '/content'
+        self.assertEquals(content.absolute_url_path(), expected)
+
+    def test_get_missing(self):
+        view = self.view
+        self.assertRaises(AttributeError, view.aqSafeGet, 'nope')
+
+    def test_set_del_get(self):
+        view = self.view
+        view.aqSafeSet('content', view.context)
+        view.aqSafeDel('content')
+        self.assertRaises(AttributeError, view.aqSafeGet, 'content')
+
+    def xtest_needed(self):
+        # activate to know if the aqSafe stuff is useful (fails if not)
+        view = self.view
+        view.content = view.context
+        self.assertRaises(Exception, view.content.absolute_url_path)
 
 def test_suite():
     return unittest.TestSuite((

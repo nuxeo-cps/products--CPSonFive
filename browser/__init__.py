@@ -20,29 +20,29 @@ from Products.Five.browser import BrowserView
 
 _missing_value = object()
 
-class AqSafeBrowserView(BrowserView):
+class AqSafeBrowserView(BrowserView, object):
     """Base class protecting against some acquisition insanity (see #2290)
     """
 
     def __init__(self, *a, **k):
-        self.aq_safe = {}
+        self._aq_safe = {}
         return BrowserView.__init__(self, *a, **k)
 
     def aqSafeGet(self, k, default=_missing_value):
         if default is _missing_value:
             try:
-                return self.aq_safe[k]
+                return self._aq_safe[k]
             except KeyError:
                 raise AttributeError(k)
 
-        return self.aq_safe.get(k, default)
+        return self._aq_safe.get(k, default)
 
     def aqSafeSet(self, k, v):
-        self.aq_safe[k] = v
+        self._aq_safe[k] = v
 
     def aqSafeDel(self, k):
         try:
-            del self.aq_safe[k]
+            del self._aq_safe[k]
         except KeyError:
             raise AttributeError(k)
 

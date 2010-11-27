@@ -1,0 +1,17 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:five="http://namespaces.zope.org/five"
+           xmlns:browser="http://namespaces.zope.org/browser"
+           >
+
+  <include package="Products.Five"/>
+
+  <five:traversable class="Products.CPSonFive.tests.test_browser.Content"/>
+
+  <browser:page
+    for="Products.CPSonFive.tests.test_browser.IContent"
+    attribute="meth"
+    name="aq_safe"
+    permission="zope.Public"
+    class="Products.CPSonFive.tests.test_browser.AqSafeTestView"/>
+
+</configure>

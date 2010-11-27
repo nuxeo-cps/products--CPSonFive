@@ -27,6 +27,7 @@ from zope.schema.interfaces import ITitledTokenizedTerm
 from zope.i18nmessageid import Message
 
 # Zope3.0.0 doesn't translates dropdownboxes (that's a bug)
+# GR TODO is this current ?
 def textForValue(self, term):
     """Extract a string from the term.
 

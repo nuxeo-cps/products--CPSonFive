@@ -20,7 +20,7 @@ from Products.Five.browser import BrowserView
 
 _missing_value = object()
 
-class AqSafeBrowserView(BrowserView, object):
+class AqSafeBrowserView(BrowserView):
     """Base class protecting against some acquisition insanity (see #2290)
     """
 

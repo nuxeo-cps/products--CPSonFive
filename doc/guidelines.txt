@@ -41,8 +41,8 @@ will keep the problems climbing CMF versions to a minimum.
 We probably should get rid of dependencies on CMF concepts that are
 nowadays almost useless within CPS. Example: CMF's MemberShipTool and
 especially MemberData aren't that useful in CPSUserFolder days. The
-interplay between CMFCore, CPSCore and CPSDefault is one of the worst
-areas of CPS.
+interplay between CMFCore, CPSCore and CPSDefault membership tools
+is one of the worst areas of CPS.
 
 About views
 ===========

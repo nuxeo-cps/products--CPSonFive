@@ -1,0 +1,79 @@
+=====================
+CPS on ZTK Guidelines
+=====================
+
+.. sectnum::    :depth: 4
+.. contents::   :depth: 4
+
+Disclaimer : this document is to be understood as a work-in-progress
+RFC.
+
+About the title, the Zope Tool Kit (ZTK) is a collection
+of libraries that provide the core functionnality (no UI) of what used to be
+called Zope 3. Zope 2.13 ships with ZTK 1.0
+
+Code facelift
+=============
+
+Skins scripts
+-------------
+
+As of today, no new core CPS feature shall be added relying Zope 2
+idiomatics, notably skins scripts and zpts; more precisely:
+
+ - fixing a skins script or zpt is welcome
+ - bringing additional functionnality to an existing one is not
+   encouraged
+ - creating new skins is almost forbidden, unless there's no
+   alternative (for instance while CPSPortlets doesn't provide ZTK
+   style rendering, it's tolerated to write new portlet widgets in skins).
+
+Rationale : because of their monolithic nature, scripts are almost
+impossible to test properly. There is almost no tests for these. They
+are a great impediment to refactor and therefore to move up Zope versions.
+
+CMF
+---
+
+Dependency on CMF must be kept as low and insulated as possible. This
+will keep the problems climbing CMF versions to a minimum.
+
+We probably should get rid of dependencies on CMF concepts that are
+nowadays almost useless within CPS. Example: CMF's MemberShipTool and
+especially MemberData aren't that useful in CPSUserFolder days. The
+interplay between CMFCore, CPSCore and CPSDefault is one of the worst
+areas of CPS.
+
+About views
+===========
+
+A plan must be made to decide what must be translated as a view, a
+viewlet, or a content provider.
+
+Most CPS views that use a template which calls ``main_template`` or
+``master`` probably ought to be translated as viewlets and focus on
+their own rendering, letting Zope machinery and CPSDesignerThemes do the
+wrapping job.
+
+Permissions
+===========
+
+After checking the practices with Zope 2.9-2.13 and BlueBream, the
+following rules are suggested for CPS permission ids.
+
+ - permission names are camel case
+ - CPS base products permissions get directly under the 'cps'
+   namespace.
+ - CPS additional components' permissions go to the namespace of the
+   package name they'd get if they started today from scratch on pure
+   ZTK. This means that the package name is lowercase, and that the
+   leading CPS is removed.
+
+Examples:
+---------
+     cps.ViewStatusHistory (defined by CPSWorkflow)
+     cps.rss.ManageChannels (defined by CPSRSS)
+
+
+
+

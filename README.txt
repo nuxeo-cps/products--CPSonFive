@@ -5,11 +5,24 @@ CPSonFive
 .. sectnum::    :depth: 4
 .. contents::   :depth: 4
 
+Initial purpose
+===============
+
 CPSonFive is a product who contains all the integration between core
 CPS functionality and Five. It's purpose it to provide a place where
 this integration can be done so that the integration can be introduced
 separately from the CPS products, thereby enabling integration without
 requiring you to use the latest development version of CPS.
+
+The future
+==========
+
+In the progressive transition to more ZTK-ish idioms, this product's
+documentation will also host coding guidelines and design goals. Check
+the corresponding pages.
+
+Features
+========
 
 Currently CPSonFive provides the following integration features:
 

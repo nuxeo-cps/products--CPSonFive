@@ -47,13 +47,37 @@ is one of the worst areas of CPS.
 About views
 ===========
 
+Page flows
+----------
+
+TODO we need a good practice for redirections. Currently, the most
+common way is to harcode the redirection in the view class code, which
+would be consistent with annotation based configuration, but not with zcml.
+
+Generalizing views
+------------------
 A plan must be made to decide what must be translated as a view, a
 viewlet, or a content provider.
 
 Most CPS views that use a template which calls ``main_template`` or
 ``master`` probably ought to be translated as viewlets and focus on
 their own rendering, letting Zope machinery and CPSDesignerThemes do the
-wrapping job.
+wrapping job. A good idea is to see what Plone is currently up to.
+
+Through the web
+---------------
+Not so old and maybe current Plone documentation still suggests to
+call skins templates and scripts from the view code, to get TTW
+customization, wich is really lame.
+We do need TTW customization, because that's a life-saver, and better
+not wait too long. Coordination would be interesting
+
+References:
+ - http://plone.org/documentation/manual/developer-manual/archetypes/appendix-practicals/b-org-creating-content-types-the-plone-2.5-way/zope-3-views
+ - http://plone.org/documentation/manual/plone-community-developer-documentation/views/layers
+ - Plone guidelines for getting rid of skins : http://plone.org/products/plone/roadmap/105
+
+TODO : make a proper ticket out of this
 
 Permissions
 ===========

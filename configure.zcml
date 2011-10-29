@@ -2,6 +2,8 @@
            xmlns:five="http://namespaces.zope.org/five"
            xmlns:browser="http://namespaces.zope.org/browser">
 
+  <include file="skin/configure.zcml" />
   <include file="form/configure.zcml" />
+
 
 </configure>

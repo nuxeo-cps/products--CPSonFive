@@ -1,0 +1,21 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="cmf_default">
+
+  <interface
+      interface=".skin.ICPSDefaultSkin"
+      type="zope.publisher.interfaces.browser.IBrowserSkinType"
+      name="cps"
+      />
+
+  <!-- Define a default template with css-oriented slots -->
+  <browser:page
+      for="Products.CMFCore.interfaces.IDynamicType"
+      layer=".skin.ICPSDefaultSkin"
+      template="five_template.pt"
+      name="five_template"
+      permission="zope.Public"
+      />
+
+</configure>

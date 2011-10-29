@@ -3,6 +3,7 @@
            xmlns:browser="http://namespaces.zope.org/browser"
            >
 
+  <include file="skin/overrides.zcml" />
   <include file="form/overrides.zcml" />
 
   <adapter

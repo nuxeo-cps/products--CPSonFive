@@ -1,8 +1,8 @@
 <configure xmlns="http://namespaces.zope.org/zope"
            xmlns:five="http://namespaces.zope.org/five"
            xmlns:browser="http://namespaces.zope.org/browser"
-           > 
-  
+           >
+
   <include file="form/overrides.zcml" />
 
   <adapter
@@ -12,8 +12,8 @@
       />
 
   <adapter
-      for="zope.publisher.interfaces.http.IHTTPRequest" 
-      provides="zope.i18n.interfaces.IUserPreferredLanguages" 
+      for="zope.publisher.interfaces.http.IHTTPRequest"
+      provides="zope.i18n.interfaces.IUserPreferredLanguages"
       factory="Products.CPSonFive.UserLanguages"
       />
 
@@ -21,8 +21,8 @@
        first. It will fail if you try to adapt anything that can't
        acquire the translation_serveice tool /-->
   <adapter
-      for="*" 
-      provides="zope.i18n.interfaces.ILanguageAvailability" 
+      for="*"
+      provides="zope.i18n.interfaces.ILanguageAvailability"
       factory="Products.CPSonFive.CPSLanguages"
       />
 

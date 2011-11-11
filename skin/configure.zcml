@@ -3,13 +3,9 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="cmf_default">
 
-  <interface
-      interface=".skin.ICPSDefaultSkin"
-      type="zope.publisher.interfaces.browser.IBrowserSkinType"
-      name="cps"
-      />
-
-  <!-- Define a default template with css-oriented slots -->
+  <!-- Define a default template with css-oriented slots
+       skin is defined and applied in overrides, which is loaded first
+  -->
   <browser:page
       for="Products.CMFCore.interfaces.IDynamicType"
       layer=".skin.ICPSDefaultSkin"

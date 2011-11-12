@@ -1,0 +1,137 @@
+=================================
+Usage of marker interfaces in CPS
+=================================
+
+.. sectnum::    :depth: 4
+.. contents::   :depth: 4
+
+Disclaimer : this document is to be understood as work-in-progress
+and aloud thinking.
+
+Introduction
+============
+A marker interface is an interface that's marked as provided at the
+instance level, instead of the more common class level.
+The ``zope.interface`` API says it's "directly provided" by the instance.
+
+The information that some object directly provides an interface is
+automatically persisted.
+
+It can be used to distinguish adapters and especially views on instance
+of one same class. This is expected to be really useful for
+CMF ``TypeInformation`` related objects, although CMF 2.1.1, our
+current target, does not seem to use them.
+
+Here we explore essentially the idea to bind Type Information objects
+with interfaces. The simplest way to do it would be to add a property
+on them, holding the fully qualified dotted name, e.g,
+``Products.CPSDefault.interfaces.marker.INewsItem``.
+
+Marker interfaces for portlets
+==============================
+
+Rationale : old style rendering process
+---------------------------------------
+
+The CPS 3.5 style rendering of portlets is to use a layout with
+usually just one visible widget in view mode. That widget then usually
+just relays to a ZPT from the skins.
+
+Some portlet types have lots of display options (specified by the
+end-user in a field),
+making the rendering cluttered with ``tal:condition="python
+display_mode=`` statements. This is one reason why the
+CPSDispatchePortletWidget has been made: to change that ZPT according
+to the value of a field.
+
+New style rendering process
+---------------------------
+The rendering will be made according to a view. To allow both portlet
+type based lookup *and* field value based, we'll use a marker
+interface for the portlet and the field value as a view name,
+therefore leading to such ZCML declarations::
+
+ <browser:page
+   for="Products.CPSPortlets.interfaces.IBreadCrumbsPortlet"
+   template="breadcrumbs.pt"
+   class=".browser.basicportlets.BreadCrumbsPortletView"
+   name="semantic_simple"
+   permission="zope2.Public"/>
+
+Typically, one would expect all views for a marker interface to share
+the same class, but that's not necessary.
+Of course the usage of marker interface is not mandatory (one could
+use the generic ```ICPSPortlet```), neither the field for rendering style.
+
+Marker interface specification
+------------------------------
+The marker interface dotted name should be stored on the type
+information object.
+
+In case of portlets, the field name should also be stored.
+
+Upgrading
+---------
+See the general part about the upgrading problem.
+
+Upgrading existing portlets (either from earlier CPS versions or
+because the Type Information changed) can be done by their
+``_rebuild`` method. In particular, either rebuilding all portlets
+(from the tool) or reimporting the profile has the effect of updating
+that information (for portlets instantiated via profiles in the latter
+case, of course).
+
+Marker interfaces for documents
+===============================
+
+Marker interfaces are expected to be useful for CPSDocument instances,
+too, as a clean way to provide business logic.
+
+The upgrade problem
+===================
+
+It's not clear at this point how to solve the upgrade problem,
+though, i.e., if for some reason the interface associated to a given
+Type Information changes.
+
+On the fly ?
+------------
+
+Of course, we could transparently check the interface during object
+retrieval or manipulation and silently upgrade it, but that would hurt
+performance. Somehow, it would be simpler if marker interfaces could
+be transient in this case. The point of persisting them is precisely
+to avoid lengthy checks.
+
+Should marker interfaces be translations of Type Information ?
+--------------------------------------------------------------
+The interface of a Type Information should never change, if that
+interface is considered a semantic equivalent of the Type Information
+in another idiom.
+
+In reality, it will probably be closer to a semantic implication, like
+the proxy type already is, meaning that different Type Information
+objects will share the same interface since the need
+of giving each a dedicated interface will grow slowly over time: CPS
+works very well without them for now. If marker interfaces should be
+one to one, we'd need to upgrade all existing CPS based projects,
+mostly with zero direct benefits.
+
+Should they be automatic ?
+--------------------------
+Another option would be to automagically associate an interface with a
+Type Information, with a naming convention. That way, the interface
+becomes truly a translation in another idiom of the Type Information itself.
+But this would mean automatic creation of interface classes upon
+request, in a dedicated module and lots of magic. And that is quite unwishable.
+
+Not such a big deal ?
+---------------------
+There are in CPS' Type Informations a few properties that aren't expected to
+change during the life of an object. For instance, the class of the
+object for Factory Based Type Information,
+so maybe it's no big deal to say that interfaces are not
+supposed to change, or that one has to run a dedicated upgrade step
+if that happens.
+
+This path is the chosen one for the short run.

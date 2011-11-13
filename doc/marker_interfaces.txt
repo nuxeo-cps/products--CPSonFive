@@ -134,4 +134,19 @@ so maybe it's no big deal to say that interfaces are not
 supposed to change, or that one has to run a dedicated upgrade step
 if that happens.
 
-This path is the chosen one for the short run.
+Hooking on the datamodel
+------------------------
+
+On the other hand, if those document type marker interfaces were set
+on datamodels insted of persistent documents, we would not have such
+troubles.
+
+In current applications, the datamodel has to be constructed in the
+view, and is the main source of content for it. Besides, it has
+references to a context, proxy and underlying object. In the typical
+CPSDocument case, proxy and context are equal. In the typical
+CPSPortlets case, there's no proxy, context and object are equal.
+But the datamodel could be the perfect fit for portlets: context could
+be the infamous ``context_obj``, e.g, from where the portlet is called.
+
+This path is currently beeing experimented.

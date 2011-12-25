@@ -61,7 +61,7 @@ from zope.event import notify
 from Products.Five.form import EditView, Update, applyWidgetsChanges
 from zope.app.form.interfaces import WidgetsError
 from zope.app.form.utility import setUpEditWidgets, applyWidgetsChanges
-from zope.app.event.objectevent import ObjectModifiedEvent
+from zope.lifecycleevent import ObjectModifiedEvent
 try:
     from zope.app.i18n import ZopeMessageFactory as _
 except:

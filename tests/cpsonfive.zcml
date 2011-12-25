@@ -5,8 +5,6 @@
 
   <include package="Products.Five"/>
 
-  <five:traversable class="Products.CPSonFive.tests.test_browser.Content"/>
-
   <browser:page
     for="Products.CPSonFive.tests.test_browser.IContent"
     attribute="meth"

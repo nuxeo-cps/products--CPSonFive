@@ -6,7 +6,7 @@ New features
 -
 Bug fixes
 ~~~~~~~~~
--
+- #2559: restored registration of CPS standard macros
 New internal features
 ~~~~~~~~~~~~~~~~~~~~~
 - 

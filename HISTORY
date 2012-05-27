@@ -1,4 +1,21 @@
 ===========================================================
+Package: CPSonFive 1.10.1
+===========================================================
+First release built by: gracinet at: 2012-05-27T20:59:31
+Requires
+~~~~~~~~
+-
+New features
+~~~~~~~~~~~~
+-
+Bug fixes
+~~~~~~~~~
+- #2559: restored registration of CPS standard macros
+New internal features
+~~~~~~~~~~~~~~~~~~~~~
+- 
+
+===========================================================
 Package: CPSonFive 1.10.0
 ===========================================================
 First release built by: gracinet at: 2012-01-21T22:23:45
